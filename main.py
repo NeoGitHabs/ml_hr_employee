@@ -1,14 +1,10 @@
 import uvicorn
 from fastapi import FastAPI
+from model_rf import predict_rf_router
 
 
 app = FastAPI()
-
-
-
-
-
-
+app.include_router(predict_rf_router)
 
 
 
