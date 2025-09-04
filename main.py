@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
-from model_rf import predict_rf_router
+from api.model_rf import predict_rf_router
 
 
 app = FastAPI()

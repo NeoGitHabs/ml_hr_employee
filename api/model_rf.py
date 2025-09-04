@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from schema import EmployeeSchema
+from db.schema import EmployeeSchema
 import joblib
 
 
