@@ -21,8 +21,7 @@ async def check_rf(data: EmployeeSchema):
         1 if new_job_role == 'Research Director' else 0,
         1 if new_job_role == 'Research Scientist' else 0,
         1 if new_job_role == 'Sales Executive' else 0,
-        1 if new_job_role == 'Sales Representative' else 0
-    ]
+        1 if new_job_role == 'Sales Representative' else 0]
 
     new_over_time = data_dict.pop('OverTime')
     over_time_binary = [1 if new_over_time == 'Yes' else 0]
@@ -30,6 +29,7 @@ async def check_rf(data: EmployeeSchema):
     features = list(data_dict.values()) + job_role_binary + over_time_binary
     scaled = scaler.transform([features])
     prediction = model.predict(scaled)[0]
+    return {'Answer': 'Yes' if prediction == 1 else 'No'}
 
-    response = data_dict | {'OverTime': new_over_time, 'JobRole': new_job_role, 'Answer': 'Yes' if prediction == 1 else 'No'}
-    return response
+    # response = data_dict | {'OverTime': new_over_time, 'JobRole': new_job_role, 'Answer': 'Yes' if prediction == 1 else 'No'}
+    # return response
