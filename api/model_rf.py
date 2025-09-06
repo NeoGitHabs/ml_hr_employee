@@ -8,7 +8,7 @@ scaler = joblib.load('scaler.pkl')
 
 predict_rf_router = APIRouter(prefix='/predict_rf', tags=['Predict_RF'])
 
-@predict_rf_router.post('/', response_model=EmployeeSchema)
+@predict_rf_router.post('/')
 async def check_rf(data: EmployeeSchema):
     data_dict = dict(data)
 
@@ -29,7 +29,7 @@ async def check_rf(data: EmployeeSchema):
     features = list(data_dict.values()) + job_role_binary + over_time_binary
     scaled = scaler.transform([features])
     prediction = model.predict(scaled)[0]
-    return {'Answer': 'Yes' if prediction == 1 else 'No'}
-
-    # response = data_dict | {'OverTime': new_over_time, 'JobRole': new_job_role, 'Answer': 'Yes' if prediction == 1 else 'No'}
-    # return response
+    if prediction == 1:
+        return {'Answer': 'Yes'}
+    else:
+        return {'Answer': 'No'}
