@@ -29,7 +29,4 @@ async def check_rf(data: EmployeeSchema):
     features = list(data_dict.values()) + job_role_binary + over_time_binary
     scaled = scaler.transform([features])
     prediction = model.predict(scaled)[0]
-    if prediction == 1:
-        return {'Answer': 'Yes'}
-    else:
-        return {'Answer': 'No'}
+    return {"Answer: " + 'Yes' if prediction == 1 else 'No'}
