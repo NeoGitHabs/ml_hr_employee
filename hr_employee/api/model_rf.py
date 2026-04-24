@@ -1,10 +1,15 @@
 from fastapi import APIRouter
 from db.schema import EmployeeSchema
 import joblib
+from pathlib import Path
 
 
-model = joblib.load('model_rf.pkl')
-scaler = joblib.load('scaler.pkl')
+
+BASE_DIR = Path(__file__).parent
+
+model = joblib.load(BASE_DIR / 'model_rf.pkl')
+scaler = joblib.load(BASE_DIR / 'scaler.pkl')
+
 
 predict_rf_router = APIRouter(prefix='/predict_rf', tags=['Predict_RF'])
 
